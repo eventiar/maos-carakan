@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maos_carakan/views/onboarding.dart';
+import 'package:maos_carakan/views/onboardingView.dart';
 
 void main() {
   runApp(const MyApp());

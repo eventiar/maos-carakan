@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maos_carakan/utils/colors.dart';
+import 'package:maos_carakan/views/welcomeView.dart';
 
 List onboardingList = [
   {
@@ -84,7 +85,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontFamily: "PoppinsLight",
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     color: secondaryColor),
                               ),
                             )
@@ -98,7 +99,9 @@ class _OnboardingViewState extends State<OnboardingView> {
           Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: (16)),
+                padding: const EdgeInsets.only(
+                  bottom: 32,
+                ),
                 child: Wrap(
                   spacing: 8,
                   children: [
@@ -139,11 +142,17 @@ class _OnboardingViewState extends State<OnboardingView> {
                 padding: const EdgeInsets.only(bottom: 16, left: 20, right: 20),
                 child: GestureDetector(
                   onTap: () {
-                    _pageController.animateToPage(
-                      currentPage + 1,
-                      duration: const Duration(milliseconds: 120),
-                      curve: Curves.easeInOut,
-                    );
+                    if (currentPage == 2) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const WelcomeView()));
+                    } else {
+                      _pageController.animateToPage(
+                        currentPage + 1,
+                        duration: const Duration(milliseconds: 120),
+                        curve: Curves.easeInOut,
+                      );
+                    }
                     print(currentPage == 2 ? "Mulai Sekarang!" : "Lanjutkan");
                   },
                   child: Container(
@@ -159,14 +168,14 @@ class _OnboardingViewState extends State<OnboardingView> {
                       style: TextStyle(
                           color: primaryColor,
                           fontFamily: "PoppinsSemibold",
-                          fontSize: 14),
+                          fontSize: 16),
                     ),
                   ),
                 ),
               ),
               currentPage == 2
                   ? SizedBox(
-                      height: 66,
+                      height: 69,
                     )
                   : Padding(
                       padding: const EdgeInsets.only(
@@ -201,7 +210,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                             style: TextStyle(
                                 color: secondaryColor,
                                 fontFamily: "PoppinsSemibold",
-                                fontSize: 14),
+                                fontSize: 16),
                           ),
                         ),
                       ),
