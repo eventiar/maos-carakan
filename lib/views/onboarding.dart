@@ -139,7 +139,12 @@ class _OnboardingViewState extends State<OnboardingView> {
                 padding: const EdgeInsets.only(bottom: 16, left: 20, right: 20),
                 child: GestureDetector(
                   onTap: () {
-                    print("Lanjutkan");
+                    _pageController.animateToPage(
+                      currentPage + 1,
+                      duration: const Duration(milliseconds: 120),
+                      curve: Curves.easeInOut,
+                    );
+                    print(currentPage == 2 ? "Mulai Sekarang!" : "Lanjutkan");
                   },
                   child: Container(
                     width: double.infinity,
@@ -149,7 +154,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
-                      'Lanjutkan',
+                      currentPage == 2 ? "Mulai Sekarang!" : "Lanjutkan",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: primaryColor,
@@ -159,38 +164,48 @@ class _OnboardingViewState extends State<OnboardingView> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                child: GestureDetector(
-                  onTap: () {
-                    print("Lewati");
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: secondaryColor, width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: secondaryColor,
-                          blurRadius: 0,
-                          offset: const Offset(0, 2),
-                        )
-                      ],
+              currentPage == 2
+                  ? SizedBox(
+                      height: 66,
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 20, left: 20, right: 20),
+                      child: GestureDetector(
+                        onTap: () {
+                          _pageController.animateToPage(
+                            2,
+                            duration: const Duration(milliseconds: 120),
+                            curve: Curves.easeInOut,
+                          );
+                          print("Lewati");
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: secondaryColor, width: 2),
+                            boxShadow: [
+                              BoxShadow(
+                                color: secondaryColor,
+                                blurRadius: 0,
+                                offset: const Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: Text(
+                            'Lewati',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: secondaryColor,
+                                fontFamily: "PoppinsSemibold",
+                                fontSize: 14),
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Text(
-                      'Lewati',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: secondaryColor,
-                          fontFamily: "PoppinsSemibold",
-                          fontSize: 14),
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ],
