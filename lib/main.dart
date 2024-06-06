@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maos_carakan/utils/colors.dart';
 import 'package:maos_carakan/views/onboardingView.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Maos Carakan',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
         useMaterial3: true,
       ),
       home: const OnboardingView(),
