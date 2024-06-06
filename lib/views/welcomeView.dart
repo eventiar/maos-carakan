@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:maos_carakan/views/loginView.dart';
 import 'package:maos_carakan/views/onboardingView.dart';
+import 'package:maos_carakan/views/registerView.dart';
 
 import '../utils/colors.dart';
 
@@ -92,7 +93,11 @@ class _WelcomeViewState extends State<WelcomeView> {
           Padding(
             padding: const EdgeInsets.only(bottom: 16, left: 20, right: 20),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const RegisterView(),
+                ),
+              ),
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(vertical: 12),

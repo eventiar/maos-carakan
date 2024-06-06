@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:maos_carakan/utils/colors.dart';
-import 'package:maos_carakan/views/registerView.dart';
+import 'package:maos_carakan/views/loginView.dart';
 import 'package:maos_carakan/views/welcomeView.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class RegisterView extends StatefulWidget {
+  const RegisterView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _RegisterViewState extends State<RegisterView> {
   bool isHide = true;
+  bool isReHide = true;
 
-  TextEditingController usernameEmailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController repasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class _LoginViewState extends State<LoginView> {
                       bottom: 16,
                     ),
                     child: Text(
-                      "Masuk",
+                      "Buat Akun",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontFamily: "PoppinsSemibold",
@@ -65,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                       bottom: 16,
                     ),
                     child: Text(
-                      "Masukkan username atau Email dan kata sandi anda untuk melanjutkan.",
+                      "Masukkan data diri anda untuk mengakses aplikasi.",
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           fontFamily: "PoppinsLight",
@@ -74,7 +77,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   Text(
-                    "Username atau Email",
+                    "Username",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontFamily: "Poppinssemibold",
@@ -83,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   TextFormField(
                     onChanged: (value) => setState(() {}),
-                    controller: usernameEmailController,
+                    controller: usernameController,
                     style: TextStyle(
                       color: primaryColor,
                       fontFamily: 'poppinslight',
@@ -99,7 +102,45 @@ class _LoginViewState extends State<LoginView> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      hintText: "Masukan username atau email anda",
+                      hintText: "Masukan username anda",
+                      hintStyle: TextStyle(
+                          color: primaryColor.withOpacity(0.3),
+                          fontFamily: 'poppinslight',
+                          fontSize: 16),
+                      filled: true,
+                      fillColor: variantWhiteColor,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text(
+                      "Email",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontFamily: "Poppinssemibold",
+                          fontSize: 16,
+                          color: primaryColor),
+                    ),
+                  ),
+                  TextFormField(
+                    onChanged: (value) => setState(() {}),
+                    controller: emailController,
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontFamily: 'poppinslight',
+                      fontSize: 16,
+                    ),
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor, width: 2),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      hintText: "Masukan email anda",
                       hintStyle: TextStyle(
                           color: primaryColor.withOpacity(0.3),
                           fontFamily: 'poppinslight',
@@ -159,26 +200,79 @@ class _LoginViewState extends State<LoginView> {
                     ),
                   ),
                   Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text(
+                      "Ulangi Password",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontFamily: "Poppinssemibold",
+                          fontSize: 16,
+                          color: primaryColor),
+                    ),
+                  ),
+                  TextFormField(
+                    onChanged: (value) => setState(() {}),
+                    controller: repasswordController,
+                    obscureText: isReHide,
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontFamily: 'poppinslight',
+                      fontSize: 16,
+                    ),
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          isReHide = !isReHide;
+                          setState(() {});
+                        },
+                        icon: Icon(
+                          isReHide ? Iconsax.eye_slash5 : Iconsax.eye,
+                          color: primaryColor,
+                          size: 24,
+                        ),
+                      ),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryColor, width: 2),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      hintText: "Masukan ulang password anda",
+                      hintStyle: TextStyle(
+                          color: primaryColor.withOpacity(0.3),
+                          fontFamily: 'poppinslight',
+                          fontSize: 16),
+                      filled: true,
+                      fillColor: variantWhiteColor,
+                    ),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.only(top: 32),
                     child: GestureDetector(
                       onTap: () {
-                        if (usernameEmailController.text != "" &&
-                            passwordController.text != "") {
+                        if (usernameController.text != "" &&
+                            emailController.text != "" &&
+                            passwordController.text != "" &&
+                            repasswordController.text != "") {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       const LoginView()));
                         } else {
-                          print(
-                              'Username Email dan Password tidak boleh kosong');
+                          print('Silahakan Isi Data');
                         }
                       },
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
-                          color: usernameEmailController.text != "" &&
-                                  passwordController.text != ""
+                          color: usernameController.text != "" &&
+                                  emailController.text != "" &&
+                                  passwordController.text != "" &&
+                                  repasswordController.text != ""
                               ? secondaryColor
                               : secondaryColor.withOpacity(0.25),
                           borderRadius: BorderRadius.circular(16),
@@ -192,7 +286,7 @@ class _LoginViewState extends State<LoginView> {
                           ],
                         ),
                         child: Text(
-                          'Masuk',
+                          'Buat Akun',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: primaryColor,
@@ -284,7 +378,7 @@ class _LoginViewState extends State<LoginView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Belum punya akun? ",
+                    "Sudah punya akun? ",
                     style: TextStyle(
                         fontFamily: "PoppinsLight",
                         fontSize: 16,
@@ -293,11 +387,11 @@ class _LoginViewState extends State<LoginView> {
                   GestureDetector(
                     onTap: () => Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (BuildContext context) => const RegisterView(),
+                        builder: (BuildContext context) => const LoginView(),
                       ),
                     ),
                     child: Text(
-                      "Buat Sekarang",
+                      "Masuk Sekarang",
                       style: TextStyle(
                           fontFamily: "PoppinsSemibold",
                           fontSize: 16,
